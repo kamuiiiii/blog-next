@@ -403,3 +403,68 @@
 .notion-equation.notion-equation-block{
   align-items: center;
 }
+
+/**
+ * Custom css
+ */
+.notion-page-icon{
+  border-radius: 50% !important;
+}
+
+.notion-title {
+  font-size: 2em;
+}
+
+.notion-quote {
+  padding: 0.2em 0.75em;
+  color: #777;
+  font-size: 1em;
+  line-height: 1.65;
+  border-left: 4px solid #67bdfc;
+}
+
+.notion-gallery-grid .notion-page-title-text {
+  font-size: 1.4em;
+}
+
+.notion-collection-card-cover {
+  max-height: 190px;
+  height: auto;
+  border-radius: 16px;
+  overflow: visible;
+  box-shadow: none;
+}
+
+.notion-property-text, .notion-property-date {
+  color: rgba(55, 65, 81, 0.8);
+}
+
+.notion-property form {
+  display: inline-block;
+}
+
+.dark-mode .notion-property-text, .dark-mode .notion-property-date {
+  color: rgba(209, 213, 219, 1);
+}
+
+.notion-bookmark:hover {
+  border-image: none;
+}
+
+.breadcrumb.button.dark {
+  padding: 10px;
+}
+
+.breadcrumb.button.dark svg {
+  width: 18px;
+  height: 18px;
+}
+
+.breadcrumb.button.light {
+  padding: 9px;
+}
+
+.breadcrumb.button.light svg {
+  width: 20px;
+  height: 20px;
+}

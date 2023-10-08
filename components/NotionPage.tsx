@@ -2,30 +2,31 @@ import * as React from 'react'
 import dynamic from 'next/dynamic'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
+import {useRouter} from 'next/router'
 
 import cs from 'classnames'
-import { PageBlock } from 'notion-types'
-import { formatDate, getBlockTitle, getPageProperty } from 'notion-utils'
+import {PageBlock} from 'notion-types'
+import {formatDate, getBlockTitle, getPageProperty} from 'notion-utils'
 import BodyClassName from 'react-body-classname'
-import { NotionRenderer } from 'react-notion-x'
+import {NotionRenderer} from 'react-notion-x'
 import TweetEmbed from 'react-tweet-embed'
-import { useSearchParam } from 'react-use'
+import {useSearchParam} from 'react-use'
 
 import * as config from '@/lib/config'
 import * as types from '@/lib/types'
-import { mapImageUrl } from '@/lib/map-image-url'
-import { getCanonicalPageUrl, mapPageUrl } from '@/lib/map-page-url'
-import { searchNotion } from '@/lib/search-notion'
-import { useDarkMode } from '@/lib/use-dark-mode'
+import {mapImageUrl} from '@/lib/map-image-url'
+import {getCanonicalPageUrl, mapPageUrl} from '@/lib/map-page-url'
+import {searchNotion} from '@/lib/search-notion'
+import {useDarkMode} from '@/lib/use-dark-mode'
 
-import { Footer } from './Footer'
-import { GitHubShareButton } from './GitHubShareButton'
-import { Loading } from './Loading'
-import { NotionPageHeader } from './NotionPageHeader'
-import { Page404 } from './Page404'
-import { PageAside } from './PageAside'
-import { PageHead } from './PageHead'
+import {Footer} from './Footer'
+import {Loading} from './Loading'
+import {NotionPageHeader} from './NotionPageHeader'
+import {PageHead} from './PageHead'
+import {Page404} from './Page404'
+import {PageAside} from './PageAside'
+
+
 import styles from './styles.module.css'
 
 // -----------------------------------------------------------------------------
@@ -97,12 +98,12 @@ const Modal = dynamic(
   }
 )
 
-const Tweet = ({ id }: { id: string }) => {
-  return <TweetEmbed tweetId={id} />
+const Tweet = ({id}: { id: string }) => {
+  return <TweetEmbed tweetId={id}/>
 }
 
 const propertyLastEditedTimeValue = (
-  { block, pageHeader },
+  {block, pageHeader},
   defaultFn: () => React.ReactNode
 ) => {
   if (pageHeader && block?.last_edited_time) {
@@ -115,7 +116,7 @@ const propertyLastEditedTimeValue = (
 }
 
 const propertyDateValue = (
-  { data, schema, pageHeader },
+  {data, schema, pageHeader},
   defaultFn: () => React.ReactNode
 ) => {
   if (pageHeader && schema?.name?.toLowerCase() === 'published') {
@@ -132,7 +133,7 @@ const propertyDateValue = (
 }
 
 const propertyTextValue = (
-  { schema, pageHeader },
+  {schema, pageHeader},
   defaultFn: () => React.ReactNode
 ) => {
   if (pageHeader && schema?.name?.toLowerCase() === 'author') {
@@ -143,11 +144,11 @@ const propertyTextValue = (
 }
 
 export const NotionPage: React.FC<types.PageProps> = ({
-  site,
-  recordMap,
-  error,
-  pageId
-}) => {
+                                                        site,
+                                                        recordMap,
+                                                        error,
+                                                        pageId
+                                                      }) => {
   const router = useRouter()
   const lite = useSearchParam('lite')
 
@@ -172,7 +173,7 @@ export const NotionPage: React.FC<types.PageProps> = ({
   // lite mode is for oembed
   const isLiteMode = lite === 'true'
 
-  const { isDarkMode } = useDarkMode()
+  const {isDarkMode} = useDarkMode()
 
   const siteMapPageUrl = React.useMemo(() => {
     const params: any = {}
@@ -195,19 +196,19 @@ export const NotionPage: React.FC<types.PageProps> = ({
 
   const pageAside = React.useMemo(
     () => (
-      <PageAside block={block} recordMap={recordMap} isBlogPost={isBlogPost} />
+      <PageAside block={block} recordMap={recordMap} isBlogPost={isBlogPost}/>
     ),
     [block, recordMap, isBlogPost]
   )
 
-  const footer = React.useMemo(() => <Footer />, [])
+  const footer = React.useMemo(() => <Footer/>, [])
 
   if (router.isFallback) {
-    return <Loading />
+    return <Loading/>
   }
 
   if (error || !site || !block) {
-    return <Page404 site={site} pageId={pageId} error={error} />
+    return <Page404 site={site} pageId={pageId} error={error}/>
   }
 
   const title = getBlockTitle(block, recordMap) || site.name
@@ -233,8 +234,8 @@ export const NotionPage: React.FC<types.PageProps> = ({
 
   const socialImage = mapImageUrl(
     getPageProperty<string>('Social Image', block, recordMap) ||
-      (block as PageBlock).format?.page_cover ||
-      config.defaultPageCover,
+    (block as PageBlock).format?.page_cover ||
+    config.defaultPageCover,
     block
   )
 
@@ -253,8 +254,8 @@ export const NotionPage: React.FC<types.PageProps> = ({
         url={canonicalPageUrl}
       />
 
-      {isLiteMode && <BodyClassName className='notion-lite' />}
-      {isDarkMode && <BodyClassName className='dark-mode' />}
+      {isLiteMode && <BodyClassName className='notion-lite'/>}
+      {isDarkMode && <BodyClassName className='dark-mode'/>}
 
       <NotionRenderer
         bodyClassName={cs(
@@ -280,8 +281,6 @@ export const NotionPage: React.FC<types.PageProps> = ({
         pageAside={pageAside}
         footer={footer}
       />
-
-      <GitHubShareButton />
     </>
   )
 }

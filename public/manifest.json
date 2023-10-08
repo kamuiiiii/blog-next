@@ -1,20 +1,20 @@
 {
-  "name": "Next.js Notion Starter Kit",
-  "short_name": "Starter Kit",
+  "name": "Kamui Blog",
+  "short_name": "Kamui Blog",
   "icons": [
     {
-      "src": "/favicon.png",
-      "type": "image/png",
+      "src": "/favicon.svg",
+      "type": "image/svg",
       "sizes": "32x32"
     },
     {
-      "src": "/favicon-128x128.png",
-      "type": "image/png",
+      "src": "/favicon.svg",
+      "type": "image/svg",
       "sizes": "128x128"
     },
     {
-      "src": "/favicon-192x192.png",
-      "type": "image/png",
+      "src": "/favicon.svg",
+      "type": "image/svg",
       "sizes": "192x192"
     }
   ],
